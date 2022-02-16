@@ -7,6 +7,6 @@ RUN adduser -h /home/sohai -s /bin/sh -D sohai
 RUN echo -n 'sohai:kucingliar' | chpasswd
 
 ENTRYPOINT ["/entrypoint.sh"]
-EXPOSE 22
+EXPOSE 2222
 
 COPY entrypoint.sh /

@@ -46,6 +46,10 @@ drwxr-xr-x   5 sohai  staff   160 Feb 11 10:11 modules
 kucingliar$
 ```
 
-
 #server test:
 > ubuntu@3.134.219.221
+
+# Testing Local Slave server
+> cd docker/ 
+> docker build -t metal-slave .
+> docker run --name metal_slave_1 -p 2201:2222 -d metal-slave:latest
