@@ -76,7 +76,6 @@ func shellSession(ctx context.Context, pl *ServerConn) {
 				chn.Close()
 
 			}()
-
 		case rfc_4254.X11Req:
 			r.Reply(false, []byte(fmt.Sprintf("%s-not-supported", r.Type)))
 		case rfc_4254.Exec:

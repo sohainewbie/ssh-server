@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os/exec"
+	"strings"
 
 	"github.com/abiosoft/ishell"
 	"github.com/abiosoft/readline"
@@ -41,28 +42,19 @@ func Shell(session *Session) *ishell.Shell {
 	}
 
 	shell.AddCmd(&ishell.Cmd{
-		Name: "ls",
-		Help: "",
+		Name: "cmd",
+		Help: "Sent all command",
 		Func: func(c *ishell.Context) {
 			c.ShowPrompt(false)
 			defer c.ShowPrompt(true)
-
-			cmd := exec.Command("ls", "-al")
-			output, _ := cmd.CombinedOutput()
-
-			// c.Print("Please insert the password: ")
-			// password, err := c.ReadLineErr()
-			// if err != nil {
-			// 	c.Println(err.Error())
-			// 	return
-			// }
-			c.Printf("%s\n", string(output))
-
+			if len(c.Args) > 0 {
+				arg1, arg2 := strings.Join(c.Args[:1], " "), strings.Join(c.Args[1:], " ")
+				cmd := exec.Command(arg1, arg2)
+				output, _ := cmd.CombinedOutput()
+				c.Printf("%s\n", string(output))
+			}
 		},
 	})
-
-	// addKeyCmds(shell, session)
-	// addUserCmds(shell, session)
 
 	shell.Interrupt(
 		func(c *ishell.Context, count int, line string) {

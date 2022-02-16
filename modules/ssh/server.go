@@ -78,5 +78,7 @@ func (server *Server) accept(tcpConn net.Conn) {
 	log.Printf("New SSH connection from %s (%s)", sshConn.RemoteAddr(), sshConn.ClientVersion())
 
 	pl := &ServerConn{sshConn, chans, reqs}
+
+	// Set up terminal modes
 	shellSession(server.ctx, pl)
 }

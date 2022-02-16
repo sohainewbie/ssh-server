@@ -19,7 +19,6 @@
         "textDisplay": "Welcome to Server"
     }
 }
-
 ```
 
 # Testing connect to SSH Server
@@ -46,3 +45,7 @@ drwxr-xr-x   5 sohai  staff   160 Feb 11 10:11 modules
 
 kucingliar$
 ```
+
+
+#server test:
+> ubuntu@3.134.219.221
