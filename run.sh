@@ -1,0 +1,1 @@
+nohup ./ssh-linux> nohup.out 2>&1&
