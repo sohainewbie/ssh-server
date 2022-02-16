@@ -3,7 +3,7 @@
         "host": "localhost",
         "port": 4555,
         "username": "kucingliar",
-        "password": "1",
+        "password": "kucingliar123",
         "hostKeyFile" : "id_rsa",
         "clientAuth" : true,
         "textDisplay": "Welcome to Server"
