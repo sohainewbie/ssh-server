@@ -48,8 +48,12 @@ func Shell(session *Session) *ishell.Shell {
 			c.ShowPrompt(false)
 			defer c.ShowPrompt(true)
 			if len(c.Args) > 0 {
-				arg1, arg2 := strings.Join(c.Args[:1], " "), strings.Join(c.Args[1:], " ")
-				cmd := exec.Command(arg1, arg2)
+				cmd := exec.Command(c.Args[0])
+				if len(c.Args) > 1 {
+					arg1, arg2 := strings.Join(c.Args[:1], " "), strings.Join(c.Args[1:], " ")
+					cmd = exec.Command(arg1, arg2)
+				}
+
 				output, _ := cmd.CombinedOutput()
 				c.Printf("%s\n", string(output))
 			}
