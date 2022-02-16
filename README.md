@@ -52,4 +52,4 @@ kucingliar$
 # Testing Local Slave server
 > cd docker/ 
 > docker build -t metal-slave .
-> docker run --name metal_slave_1 -p 2201:2222 -d metal-slave:latest
+> docker run --name metal_slave_1 -d -p 2201:22 metal-slave:latest
