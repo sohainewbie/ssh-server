@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
+	"log"
 	cg "ssh-server/modules/config"
-	"ssh-server/modules/sftp"
+	ssh "ssh-server/modules/ssh"
 )
 
 /*
@@ -23,12 +24,11 @@ func LoadConfig() (p program) {
 }
 
 func main() {
-	//config := LoadConfig()
-	//server, err := ssh.NewServer(config.mainContext)
+	config := LoadConfig()
+	server, err := ssh.NewServer(config.mainContext)
 
-	sftp.NewScp()
-	//if err != nil {
-	//	log.Panicf("Can't create server: %s", err)
-	//}
-	//server.Listen()
+	if err != nil {
+		log.Panicf("Can't create server: %s", err)
+	}
+	server.Listen()
 }

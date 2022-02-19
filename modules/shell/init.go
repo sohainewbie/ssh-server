@@ -4,14 +4,13 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"os/exec"
-	"strings"
 
 	"github.com/abiosoft/ishell"
 	"github.com/abiosoft/readline"
 	"golang.org/x/crypto/ssh"
 
 	cg "ssh-server/modules/config"
+	// "ssh-server/modules/sftp"
 )
 
 type Session struct {
@@ -41,24 +40,8 @@ func Shell(session *Session) *ishell.Shell {
 		shell.Println(cg.Config.SSH.TextDisplay)
 	}
 
-	shell.AddCmd(&ishell.Cmd{
-		Name: "cmd",
-		Help: "Sent all command",
-		Func: func(c *ishell.Context) {
-			c.ShowPrompt(false)
-			defer c.ShowPrompt(true)
-			if len(c.Args) > 0 {
-				cmd := exec.Command(c.Args[0])
-				if len(c.Args) > 1 {
-					arg1, arg2 := strings.Join(c.Args[:1], " "), strings.Join(c.Args[1:], " ")
-					cmd = exec.Command(arg1, arg2)
-				}
-
-				output, _ := cmd.CombinedOutput()
-				c.Printf("%s\n", string(output))
-			}
-		},
-	})
+	executeCMD(shell, session)
+	sftpCmd(shell, session)
 
 	shell.Interrupt(
 		func(c *ishell.Context, count int, line string) {
