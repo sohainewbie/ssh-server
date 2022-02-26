@@ -39,6 +39,7 @@ func UploadFile(payload SFTPConfig) (err error) {
 		return
 	}
 
+	log.Printf("payload.Location: " + payload.Location)
 	fDestination, err := sftpClient.Create(payload.Location)
 	if err != nil {
 		log.Printf("Failed to create destination file. " + err.Error())

@@ -54,7 +54,7 @@ func sftpCmd(shell *ishell.Shell, session *Session) {
 				User:     user,
 				Pass:     pass,
 				Address:  fmt.Sprintf("%s:%s", host, port),
-				Location: fmt.Sprintf("%s/%s", fileLocation, fileName),
+				Location: fmt.Sprintf("%s", fileLocation),
 				Filename: fileName,
 			}
 
