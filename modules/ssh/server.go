@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net"
+	"github.com/satori/go.uuid"
 	cg "ssh-server/modules/config"
 )
 
@@ -63,6 +64,8 @@ func (server *Server) Listen() {
 }
 
 type ServerConn struct {
+	User      string
+	UUID      string
 	Conn       *ssh.ServerConn
 	NewChannel <-chan ssh.NewChannel
 	Reqs       <-chan *ssh.Request
@@ -75,9 +78,12 @@ func (server *Server) accept(tcpConn net.Conn) {
 		log.Printf("Failed handshake (%s)", err)
 		return
 	}
-	log.Printf("New SSH connection from %s (%s)", sshConn.RemoteAddr(), sshConn.ClientVersion())
 
-	pl := &ServerConn{sshConn, chans, reqs}
+	user := sshConn.User()
+	uuid := fmt.Sprintf("%+v", uuid.NewV4())
+	log.Printf("New SSH connection from %s (%s) | user : %s | uuid : %s", sshConn.RemoteAddr(), sshConn.ClientVersion(), user, uuid)
+
+	pl := &ServerConn{user, uuid, sshConn, chans, reqs}
 
 	// Set up terminal modes
 	shellSession(server.ctx, pl)

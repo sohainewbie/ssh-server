@@ -20,6 +20,7 @@ type Session struct {
 	IsPty       bool
 	HistoryFile string
 	ServerConn  *ssh.ServerConn
+	Channel     io.ReadWriteCloser
 
 	Context context.Context
 }
