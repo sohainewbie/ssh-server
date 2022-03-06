@@ -9,7 +9,6 @@ import (
 	"github.com/pkg/sftp"
 	"io/ioutil"
 
-
 	"github.com/abiosoft/ishell"
 	"github.com/kballard/go-shellquote"
 	"golang.org/x/crypto/ssh"
@@ -64,7 +63,7 @@ func shellSession(ctx context.Context, pl *ServerConn) {
 		)
 		if err != nil {
 			log.Printf("Error set sftp server: %s", err)
-		}		
+		}
 		if err := server.Serve(); err == io.EOF {
 			server.Close()
 			log.Print("sftp client exited session.\n")
@@ -95,7 +94,7 @@ func shellSession(ctx context.Context, pl *ServerConn) {
 				IsPty:      isPty,
 				Context:    ctx,
 				ServerConn: serverConn,
-				Channel: chn,
+				Channel:    chn,
 			})
 			go func() {
 				sh.Run()
@@ -113,7 +112,7 @@ func shellSession(ctx context.Context, pl *ServerConn) {
 				IsPty:      isPty,
 				Context:    ctx,
 				ServerConn: serverConn,
-				Channel: chn,
+				Channel:    chn,
 			})
 
 			cmd, err := shellquote.Split(p.Command)

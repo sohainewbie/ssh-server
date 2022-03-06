@@ -3,11 +3,11 @@ package ssh
 import (
 	"context"
 	"fmt"
+	"github.com/satori/go.uuid"
 	"golang.org/x/crypto/ssh"
 	"io/ioutil"
 	"log"
 	"net"
-	"github.com/satori/go.uuid"
 	cg "ssh-server/modules/config"
 )
 
@@ -64,8 +64,8 @@ func (server *Server) Listen() {
 }
 
 type ServerConn struct {
-	User      string
-	UUID      string
+	User       string
+	UUID       string
 	Conn       *ssh.ServerConn
 	NewChannel <-chan ssh.NewChannel
 	Reqs       <-chan *ssh.Request
